@@ -83,37 +83,42 @@ player1.x = 29;
 player1.y = 645;
 world.gravity.y = 10;
 
+// esc1
 esc1 = new Sprite();
 esc1.img = "./img/esc1.png";
  esc1.x = 181;
 esc1.y = 630 ;
 esc1.scale = 0.5;
 
+// esc2
 esc2 = new Sprite();
 esc2.img = "./img/esc2.png";
  esc2.x = 96;
 esc2.y = 578 ;
 esc2.scale = 0.5;
 
+// esc6
 esc4 = new Sprite();
 esc4.img = "./img/esc2.png";
  esc4.x = 96;
-esc4y = 170 ;
+esc4.y = 353 ;
 esc4.scale = 0.5;
 
+// esc3
 esc5 = new Sprite();
 esc5.img = "./img/esc1.png";
  esc5.x = 181;
 esc5.y = 520 ;
 esc5.scale = 0.5;
 
+// esc4
 esc6 = new Sprite();
 esc6.img = "./img/esc2.png";
  esc6.x = 96;
 esc6.y = 461;
 esc6.scale = 0.5;
 
-
+// esc4
 esc7 = new Sprite();
 esc7.img = "./img/esc1.png";
  esc7.x = 181;
