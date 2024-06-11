@@ -1,6 +1,7 @@
 function setup() {
   new Canvas( 1200, 700);
    background ('white');
+   
 
   tunnel = new Sprite();
 	tunnel.width = 421;
@@ -77,6 +78,7 @@ tunnel2 = new Sprite();
     tunnel9.y = 95;
 
 player1 = new Sprite();
+player1.scale = 0.5;
 player1.x = 29;
 player1.y = 645;
 world.gravity.y = 10;
@@ -84,44 +86,38 @@ world.gravity.y = 10;
 esc1 = new Sprite();
 esc1.img = "./img/esc1.png";
  esc1.x = 181;
-esc1.y = 600 ;
+esc1.y = 630 ;
 esc1.scale = 0.5;
 
 esc2 = new Sprite();
 esc2.img = "./img/esc2.png";
  esc2.x = 96;
-esc2.y = 548 ;
+esc2.y = 578 ;
 esc2.scale = 0.5;
-
-esc3= new Sprite();
-esc3.img = "./img/esc1.png";
- esc3.x = 181;
-esc3.y = 300;
-esc3.scale = 0.5;
 
 esc4 = new Sprite();
 esc4.img = "./img/esc2.png";
  esc4.x = 96;
-esc4y = 200 ;
+esc4y = 170 ;
 esc4.scale = 0.5;
 
 esc5 = new Sprite();
 esc5.img = "./img/esc1.png";
  esc5.x = 181;
-esc5.y = 500 ;
+esc5.y = 520 ;
 esc5.scale = 0.5;
 
 esc6 = new Sprite();
 esc6.img = "./img/esc2.png";
  esc6.x = 96;
-esc6.y = 441;
+esc6.y = 461;
 esc6.scale = 0.5;
 
 
 esc7 = new Sprite();
 esc7.img = "./img/esc1.png";
  esc7.x = 181;
-esc7.y = 411 ;
+esc7.y = 410 ;
 esc7.scale = 0.5;
 
 
@@ -138,7 +134,6 @@ tunnel9.collider = 'static';
 champi3.collider ='static';
 esc1.collider = 'static';
 esc2.collider = 'static';
-esc3.collider = 'static';
 esc4.collider = 'static';
 esc5.collider = 'static';
 esc6.collider = 'static';
