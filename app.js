@@ -1,6 +1,28 @@
+let player;
+
+function loadPlayerAnimations() {
+  const idle = loadAni("image/player_stand.png");
+  idle.scale = 0.8;
+
+  const walk = loadAni("image/player_walk1.png", "image/player_walk2.png");
+  walk.scale = 0.8;
+  walk.frameDelay = 15;
+
+  const jump = loadAni("image/player_jump.png");
+  jump.scale = 0.8;
+
+  player.addAni("idle", idle);
+  player.addAni("walk", walk);
+  player.addAni("jump", jump);
+
+  player.changeAni("idle");
+}
+
 function setup() {
   new Canvas(1200, 700);
   background("white");
+
+  // BG FEATS
 
   const bg = new Sprite();
   bg.x = 600;
@@ -12,12 +34,15 @@ function setup() {
   bg.image.scale = 0.335;
   bg.collider = "none";
 
+  // TUNNEL FEATS
+
   tunnel = new Sprite();
   tunnel.width = 421;
   tunnel.height = 20;
   tunnel.x = 0;
   tunnel.y = 689;
-  tunnel.visible = false;
+  tunnel.visible = true;
+  tunnel.debug = true;
 
   tunnel2 = new Sprite();
   tunnel2.width = 7;
@@ -75,16 +100,17 @@ function setup() {
   tunnel9.y = 95;
   tunnel9.visible = false;
 
+  // MUSHROOM PLATFORM FEATS
+
   champi1 = new Sprite();
   champi1.image = "./image/champi1.png";
   champi1.scale = 0.3;
   champi1.x = 600;
   champi1.y = 440;
-  champi1.image.offset.y = 425;
-  champi1.debug = true;
+  champi1.image.offset.y = 418;
+  // champi1.debug = false;
   champi1.w = 210;
   champi1.h = 15;
-  champi1.mass = 0;
 
   champi2 = new Sprite();
   champi2.image = "./image/champi2.png";
@@ -92,7 +118,7 @@ function setup() {
   champi2.x = 880;
   champi2.y = 228;
   champi2.image.offset.y = -900;
-  champi2.debug = true;
+  // champi2.debug = false;
   champi2.w = 210;
   champi2.h = 15;
 
@@ -102,16 +128,11 @@ function setup() {
   champi3.x = 1120;
   champi3.y = 558;
   champi3.image.offset.y = 400;
-  champi3.debug = true;
+  // champi3.debug = false;
   champi3.w = 110;
   champi3.h = 15;
 
-  player1 = new Sprite();
-  player1.scale = 0.5;
-  player1.x = 29;
-  player1.y = 645;
-  world.gravity.y = 10;
-  player1.mass = 0;
+  // STAIRS FEATS
 
   // esc1
   esc1 = new Sprite();
@@ -119,6 +140,10 @@ function setup() {
   esc1.x = 191;
   esc1.y = 630;
   esc1.scale = 0.5;
+  esc1.image.offset.y = 8;
+  esc1.debug = false;
+  esc1.w = 50;
+  esc1.h = 10;
 
   // esc2
   esc2 = new Sprite();
@@ -126,6 +151,10 @@ function setup() {
   esc2.x = 106;
   esc2.y = 578;
   esc2.scale = 0.5;
+  esc2.image.offset.y = 8;
+  esc2.debug = false;
+  esc2.w = 50;
+  esc2.h = 10;
 
   // esc6
   esc4 = new Sprite();
@@ -133,6 +162,10 @@ function setup() {
   esc4.x = 106;
   esc4.y = 353;
   esc4.scale = 0.5;
+  esc4.image.offset.y = 8;
+  esc4.debug = false;
+  esc4.w = 50;
+  esc4.h = 10;
 
   // esc3
   esc5 = new Sprite();
@@ -140,6 +173,10 @@ function setup() {
   esc5.x = 191;
   esc5.y = 520;
   esc5.scale = 0.5;
+  esc5.image.offset.y = 8;
+  esc5.debug = false;
+  esc5.w = 50;
+  esc5.h = 10;
 
   // esc4
   esc6 = new Sprite();
@@ -147,6 +184,10 @@ function setup() {
   esc6.x = 106;
   esc6.y = 461;
   esc6.scale = 0.5;
+  esc6.image.offset.y = 8;
+  esc6.debug = false;
+  esc6.w = 50;
+  esc6.h = 10;
 
   // esc4
   esc7 = new Sprite();
@@ -154,6 +195,97 @@ function setup() {
   esc7.x = 191;
   esc7.y = 410;
   esc7.scale = 0.5;
+  esc7.offset.y = 8;
+  esc7.debug = false;
+  esc7.w = 50;
+  esc7.h = 10;
+
+  // DECORATION FEATS
+
+  bush = new Sprite();
+  bush.image = "./image/bush.png";
+  bush.x = 100;
+  bush.y = 671;
+  bush.scale = 0.3;
+  bush.collider = "s";
+  bush.image.offset.y = 8;
+  bush.debug = false;
+  bush.w = 50;
+  bush.h = 10;
+
+  reward1 = new Sprite();
+  reward1.image = "./image/reward1.png";
+  reward1.x = 100;
+  reward1.y = 225;
+  reward1.scale = 0.5;
+  reward1.collider = "s";
+
+  reward2 = new Sprite();
+  reward2.image = "./image/reward2.png";
+  reward2.x = 300;
+  reward2.y = 125;
+  reward2.scale = 0.5;
+  reward2.collider = "s";
+
+  reward3 = new Sprite();
+  reward3.image = "./image/reward3.png";
+  reward3.x = 180;
+  reward3.y = 385;
+  reward3.scale = 0.5;
+  reward3.collider = "s";
+
+  reward4 = new Sprite();
+  reward4.image = "./image/reward4.png";
+  reward4.x = 640;
+  reward4.y = 398;
+  reward4.scale = 1;
+  reward4.collider = "k";
+
+  pan_exit = new Sprite();
+  pan_exit.image = "./image/pan_exit.png";
+  pan_exit.x = 1170;
+  pan_exit.y = 528;
+  pan_exit.scale = 0.1;
+  pan_exit.collider = "s";
+
+  pan_up = new Sprite();
+  pan_up.image = "./image/pan_up.png";
+  pan_up.x = 1007;
+  pan_up.y = 228;
+  pan_up.scale = 0.1;
+  pan_up.collider = "k";
+
+  pan_right = new Sprite();
+  pan_right.image = "./image/pan_right.png";
+  pan_right.x = 500;
+  pan_right.y = 418;
+  pan_right.scale = 0.13;
+  pan_right.collider = "k";
+
+  // ENNEMI
+
+  ennemi = new Sprite();
+  ennemi.image = "./image/ennemi.png";
+  ennemi.x = 1150;
+  ennemi.y = 528;
+  ennemi.scale = 0.13;
+  ennemi.collider = "k";
+
+  //MESSAGES
+
+  messageW = new Sprite();
+  messageW.textSize = 40;
+  messageW.text = "CONGRATS! YOU DID IT!";
+  messageW.collider = "s";
+  messageW.visible = false;
+
+  messageL = new Sprite();
+  messageL.textSize = 40;
+  messageL.text = "OW OW! TRY AGAIN!";
+  messageL.collider = "s";
+  messageL.visible = false;
+
+  // COLLIDERS
 
   tunnel.collider = "static";
   tunnel2.collider = "static";
@@ -164,7 +296,9 @@ function setup() {
   tunnel7.collider = "static";
   tunnel8.collider = "static";
   tunnel9.collider = "static";
-  champi1.collider = "";
+
+  champi1.collider = "k";
+  champi2.collider = "k";
   champi3.collider = "static";
 
   esc1.collider = "static";
@@ -173,18 +307,57 @@ function setup() {
   esc5.collider = "static";
   esc6.collider = "static";
   esc7.collider = "static";
+
+  // PLAYER FEATS
+
+  player = new Sprite(29, 645, 33, 33);
+  player.x = 29;
+  player.y = 600;
+  player.w = 70;
+  player.h = 190;
+  world.gravity.y = 13;
+  player.scale = 0.3;
+  player.rotationLock = true;
+  player.debug = true;
+
+  loadPlayerAnimations();
 }
 
 function draw() {
   // Votre code de dessin ici
-  clear();
 
-  if (kb.pressing("left")) player1.vel.x = -3;
-  else if (kb.pressing("right")) player1.vel.x = 3;
-  //  else player1.vel.x = 0;
-  if (kb.pressing("space") && player1.vel.y <= 0.2) {
-    player1.vel.y = -3;
+  if (kb.pressing("left")) {
+    player.vel.x = -2;
+    player.changeAni("walk");
+    player.mirror.x = true;
+  } else if (kb.pressing("right")) {
+    player.vel.x = 2;
+    player.changeAni("walk");
+    player.mirror.x = false;
   }
+
+  if (kb.pressing("space")) {
+    player.vel.y = -4;
+    player.changeAni("jump");
+    player.mirror.x = false;
+  }
+
+  if (!kb.pressing("left") && !kb.pressing("right") && !kb.pressing("space")) {
+    player.changeAni("idle");
+  }
+
   champi1.vel.x = cos(frameCount) * 2;
+  reward4.vel.x = cos(frameCount) * 2;
   champi2.vel.y = cos(frameCount) * 7;
+  pan_up.vel.y = cos(frameCount) * 7;
+  pan_right.vel.x = cos(frameCount) * 2;
+  ennemi.vel.x = cos(frameCount * 2) * 0.5;
+
+  // if (player.y < -1200 && 1250) {
+  //   messageW.visible = true;
+  // }
+
+  // if (player.x < 1250) {
+  //   messageL.visible = true;
+  // }
 }
