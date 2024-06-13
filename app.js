@@ -15,8 +15,16 @@ function loadPlayerAnimations() {
   player.changeAni("idle");
 }
 
-// let coins = [];
-// let coinsRecup = 0;
+let jumpSound;
+let overSound;
+let winSound;
+
+function preload() {
+  soundFormats("wav", "ogg");
+  jumpSound = loadSound("assets/jump.wav");
+  overSound = loadSound("assets/game-over.wav");
+  winSound = loadSound("assets/well-done.ogg");
+}
 
 function setup() {
   new Canvas(1200, 700);
@@ -206,7 +214,7 @@ function setup() {
   bush.image = "./image/bush.png";
   bush.x = 100;
   bush.y = 671;
-  bush.scale = 0.3;
+  bush.scale = 0.25;
   bush.collider = "s";
   bush.image.offset.y = 8;
   bush.debug = false;
@@ -307,7 +315,7 @@ function setup() {
   gem5 = new Sprite();
   gem5.image = "./image/diamond.png";
   gem5.x = 445;
-  gem5.y = 30;
+  gem5.y = 50;
   gem5.scale = 0.22;
   gem5.collider = "k";
 
@@ -332,6 +340,29 @@ function setup() {
   pan_right.y = 418;
   pan_right.scale = 0.13;
   pan_right.collider = "k";
+
+  // GAME OVER FEATS
+
+  dead = new Sprite();
+  dead.image = "./image/paint_drips_a.png";
+  dead.x = 445;
+  dead.y = 10;
+  dead.scale = 0.22;
+  dead.collider = "s";
+
+  dead1 = new Sprite();
+  dead1.image = "./image/paint_drips_a.png";
+  dead1.x = 190;
+  dead1.y = 10;
+  dead1.scale = 0.22;
+  dead1.collider = "s";
+
+  dead = new Sprite();
+  dead.image = "./image/paint_drips_a.png";
+  dead.x = 145;
+  dead.y = 10;
+  dead.scale = 0.22;
+  dead.collider = "s";
 
   // ENNEMI
 
@@ -393,7 +424,7 @@ function setup() {
   // PLAYER FEATS
 
   player = new Sprite(29, 645, 33, 33);
-  player.x = 29;
+  player.x = 20;
   player.y = 600;
   player.w = 70;
   player.h = 90;
@@ -404,25 +435,6 @@ function setup() {
   player.debug = false;
 
   loadPlayerAnimations();
-
-  //   function coinsRecup() {
-  //     for (let i = coins.length - 1; i >= 0; i--) {
-  //       if (player.overlap(coins[i])) {
-  //         coins[i].remove();
-  //         coins.splice(i, 1);
-  //         coinsRecup++;
-  //       }
-  //     }
-  //     fill(0, 0, 0, 50);
-  //     rect(100, 100, 10, 50, 50);
-  //     fill(0);
-  //     textSize(32);
-  //     text(`coins : ${coinsRecup} / 5`, 20, 40);
-  //   }
-
-  //   if (coinsRecup === 5) {
-  //     messageW.visible = true;
-  //   }
 }
 
 function draw() {
@@ -439,9 +451,10 @@ function draw() {
   }
 
   if (kb.presses("space")) {
-    player.vel.y = -4;
+    player.vel.y = -7;
     player.changeAni("jump");
     player.mirror.x = false;
+    jumpSound.play();
   }
 
   if (!kb.pressing("left") && !kb.pressing("right") && !kb.pressing("space")) {
@@ -526,11 +539,25 @@ function draw() {
   if (player.overlaps(pan_exit)) {
     messageW.visible = true;
     player.visible = false;
+    winSound.play();
   }
 
   if (player.overlaps(ennemi)) {
     messageL.visible = true;
     player.visible = false;
+    overSound.play();
+  }
+
+  if (player.overlaps(ennemi2)) {
+    messageL.visible = true;
+    player.visible = false;
+    overSound.play();
+  }
+
+  if (player.overlaps(bush)) {
+    messageL.visible = true;
+    player.visible = false;
+    overSound.play();
   }
 
   // && = et
@@ -538,6 +565,7 @@ function draw() {
   if (player.x < 0 || player.y < 0) {
     messageL.visible = true;
     player.visible = false;
+    overSound.play();
   }
 
   if (kb.pressed("r")) {
