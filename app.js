@@ -15,6 +15,9 @@ function loadPlayerAnimations() {
   player.changeAni("idle");
 }
 
+// let coins = [];
+// let coinsRecup = 0;
+
 function setup() {
   new Canvas(1200, 700);
   background("white");
@@ -111,11 +114,11 @@ function setup() {
 
   champi2 = new Sprite();
   champi2.image = "./image/champi2.png";
-  champi2.scale = 0.11;
+  champi2.scale = 0.33;
   champi2.x = 880;
   champi2.y = 228;
-  champi2.image.offset.y = -900;
-  // champi2.debug = false;
+  champi2.image.offset.y = -700;
+  champi2.debug = false;
   champi2.w = 210;
   champi2.h = 15;
 
@@ -219,7 +222,7 @@ function setup() {
 
   reward2 = new Sprite();
   reward2.image = "./image/reward2.png";
-  reward2.x = 300;
+  reward2.x = 325;
   reward2.y = 125;
   reward2.scale = 0.5;
   reward2.collider = "s";
@@ -227,16 +230,86 @@ function setup() {
   reward3 = new Sprite();
   reward3.image = "./image/reward3.png";
   reward3.x = 180;
-  reward3.y = 385;
+  reward3.y = 394;
   reward3.scale = 0.5;
   reward3.collider = "s";
 
   reward4 = new Sprite();
   reward4.image = "./image/reward4.png";
-  reward4.x = 640;
-  reward4.y = 398;
-  reward4.scale = 1;
+  reward4.x = 602;
+  reward4.y = 402;
+  reward4.scale = 0.87;
   reward4.collider = "k";
+
+  coin = new Sprite();
+  coin.image = "./image/coin.png";
+  coin.x = 600;
+  coin.y = 352;
+  coin.scale = 0.22;
+  coin.collider = "k";
+
+  coin1 = new Sprite();
+  coin1.image = "./image/coin.png";
+  coin1.x = 555;
+  coin1.y = 368;
+  coin1.scale = 0.22;
+  coin1.collider = "k";
+
+  coin2 = new Sprite();
+  coin2.image = "./image/coin.png";
+  coin2.x = 650;
+  coin2.y = 368;
+  coin2.scale = 0.22;
+  coin2.collider = "k";
+
+  coin3 = new Sprite();
+  coin3.image = "./image/coin.png";
+  coin3.x = 670;
+  coin3.y = 410;
+  coin3.scale = 0.22;
+  coin3.collider = "k";
+
+  coin4 = new Sprite();
+  coin4.image = "./image/coin.png";
+  coin4.x = 530;
+  coin4.y = 410;
+  coin4.scale = 0.22;
+  coin4.collider = "k";
+
+  gem1 = new Sprite();
+  gem1.image = "./image/diamond.png";
+  gem1.x = 950;
+  gem1.y = 200;
+  gem1.scale = 0.22;
+  gem1.collider = "k";
+
+  gem2 = new Sprite();
+  gem2.image = "./image/diamond.png";
+  gem2.x = 815;
+  gem2.y = 200;
+  gem2.scale = 0.22;
+  gem2.collider = "k";
+
+  gem3 = new Sprite();
+  gem3.image = "./image/diamond.png";
+  gem3.x = 880;
+  gem3.y = 170;
+  gem3.scale = 0.22;
+  gem3.collider = "k";
+
+  gem4 = new Sprite();
+  gem4.image = "./image/diamond.png";
+  gem4.x = 170;
+  gem4.y = 30;
+  gem4.scale = 0.22;
+  gem4.collider = "k";
+
+  gem5 = new Sprite();
+  gem5.image = "./image/diamond.png";
+  gem5.x = 445;
+  gem5.y = 30;
+  gem5.scale = 0.22;
+  gem5.collider = "k";
 
   pan_exit = new Sprite();
   pan_exit.image = "./image/pan_exit.png";
@@ -248,7 +321,7 @@ function setup() {
 
   pan_up = new Sprite();
   pan_up.image = "./image/pan_up.png";
-  pan_up.x = 1007;
+  pan_up.x = 1000;
   pan_up.y = 228;
   pan_up.scale = 0.1;
   pan_up.collider = "k";
@@ -268,6 +341,13 @@ function setup() {
   ennemi.y = 528;
   ennemi.scale = 0.13;
   ennemi.collider = "k";
+
+  ennemi2 = new Sprite();
+  ennemi2.image = "./image/ennemi.png";
+  ennemi2.x = 170;
+  ennemi2.y = 220;
+  ennemi2.scale = 0.1;
+  ennemi2.collider = "k";
 
   //MESSAGES
 
@@ -321,25 +401,44 @@ function setup() {
   world.gravity.y = 20;
   player.scale = 0.2;
   player.rotationLock = true;
-  player.debug = true;
+  player.debug = false;
 
   loadPlayerAnimations();
+
+  //   function coinsRecup() {
+  //     for (let i = coins.length - 1; i >= 0; i--) {
+  //       if (player.overlap(coins[i])) {
+  //         coins[i].remove();
+  //         coins.splice(i, 1);
+  //         coinsRecup++;
+  //       }
+  //     }
+  //     fill(0, 0, 0, 50);
+  //     rect(100, 100, 10, 50, 50);
+  //     fill(0);
+  //     textSize(32);
+  //     text(`coins : ${coinsRecup} / 5`, 20, 40);
+  //   }
+
+  //   if (coinsRecup === 5) {
+  //     messageW.visible = true;
+  //   }
 }
 
 function draw() {
   // Votre code de dessin ici
 
   if (kb.pressing("left")) {
-    player.vel.x = -2;
+    player.vel.x = -2.5;
     player.changeAni("walk");
     player.mirror.x = true;
   } else if (kb.pressing("right")) {
-    player.vel.x = 2;
+    player.vel.x = 3.3;
     player.changeAni("walk");
     player.mirror.x = false;
   }
 
-  if (kb.pressing("space")) {
+  if (kb.presses("space")) {
     player.vel.y = -4;
     player.changeAni("jump");
     player.mirror.x = false;
@@ -349,12 +448,24 @@ function draw() {
     player.changeAni("idle");
   }
 
-  champi1.vel.x = cos(frameCount) * 2;
-  reward4.vel.x = cos(frameCount) * 2;
-  champi2.vel.y = cos(frameCount) * 4;
-  pan_up.vel.y = cos(frameCount) * 4;
-  pan_right.vel.x = cos(frameCount) * 2;
+  champi1.vel.x = cos(frameCount) * 1;
+  reward4.vel.x = cos(frameCount) * 1;
+
+  coin.vel.x = cos(frameCount) * 1;
+  coin1.vel.x = cos(frameCount) * 1;
+  coin2.vel.x = cos(frameCount) * 1;
+  coin3.vel.x = cos(frameCount) * 1;
+  coin4.vel.x = cos(frameCount) * 1;
+
+  gem1.vel.y = cos(frameCount) * 3.8;
+  gem2.vel.y = cos(frameCount) * 3.8;
+  gem3.vel.y = cos(frameCount) * 3.8;
+
+  champi2.vel.y = cos(frameCount) * 3.8;
+  pan_up.vel.y = cos(frameCount) * 3.8;
+  pan_right.vel.x = cos(frameCount) * 1;
   ennemi.vel.x = cos(frameCount * 2) * 0.5;
+  ennemi2.vel.x = cos(frameCount * 2) * 1;
 
   if (player.overlaps(reward1)) {
     reward1.remove();
@@ -372,6 +483,46 @@ function draw() {
     reward4.remove();
   }
 
+  if (player.overlaps(coin)) {
+    coin.remove();
+  }
+
+  if (player.overlaps(coin1)) {
+    coin1.remove();
+  }
+
+  if (player.overlaps(coin2)) {
+    coin2.remove();
+  }
+
+  if (player.overlaps(coin3)) {
+    coin3.remove();
+  }
+
+  if (player.overlaps(coin4)) {
+    coin4.remove();
+  }
+
+  if (player.overlaps(gem1)) {
+    gem1.remove();
+  }
+
+  if (player.overlaps(gem2)) {
+    gem2.remove();
+  }
+
+  if (player.overlaps(gem3)) {
+    gem3.remove();
+  }
+
+  if (player.overlaps(gem4)) {
+    gem4.remove();
+  }
+
+  if (player.overlaps(gem5)) {
+    gem5.remove();
+  }
+
   if (player.overlaps(pan_exit)) {
     messageW.visible = true;
     player.visible = false;
@@ -387,5 +538,9 @@ function draw() {
   if (player.x < 0 || player.y < 0) {
     messageL.visible = true;
     player.visible = false;
+  }
+
+  if (kb.pressed("r")) {
+    window.location.reload();
   }
 }
