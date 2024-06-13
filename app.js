@@ -2,14 +2,11 @@ let player;
 
 function loadPlayerAnimations() {
   const idle = loadAni("image/player_stand.png");
-  idle.scale = 0.8;
 
   const walk = loadAni("image/player_walk1.png", "image/player_walk2.png");
-  walk.scale = 0.8;
   walk.frameDelay = 15;
 
   const jump = loadAni("image/player_jump.png");
-  jump.scale = 0.8;
 
   player.addAni("idle", idle);
   player.addAni("walk", walk);
@@ -41,8 +38,8 @@ function setup() {
   tunnel.height = 20;
   tunnel.x = 0;
   tunnel.y = 689;
-  tunnel.visible = true;
-  tunnel.debug = true;
+  tunnel.visible = false;
+  tunnel.debug = false;
 
   tunnel2 = new Sprite();
   tunnel2.width = 7;
@@ -247,6 +244,7 @@ function setup() {
   pan_exit.y = 528;
   pan_exit.scale = 0.1;
   pan_exit.collider = "s";
+  pan_exit.debug = false;
 
   pan_up = new Sprite();
   pan_up.image = "./image/pan_up.png";
@@ -266,7 +264,7 @@ function setup() {
 
   ennemi = new Sprite();
   ennemi.image = "./image/ennemi.png";
-  ennemi.x = 1150;
+  ennemi.x = 1090;
   ennemi.y = 528;
   ennemi.scale = 0.13;
   ennemi.collider = "k";
@@ -278,12 +276,16 @@ function setup() {
   messageW.text = "CONGRATS! YOU DID IT!";
   messageW.collider = "s";
   messageW.visible = false;
+  messageW.w = 0;
+  messageW.h = 0;
 
   messageL = new Sprite();
   messageL.textSize = 40;
   messageL.text = "OW OW! TRY AGAIN!";
   messageL.collider = "s";
   messageL.visible = false;
+  messageL.w = 0;
+  messageL.h = 0;
 
   // COLLIDERS
 
@@ -314,9 +316,10 @@ function setup() {
   player.x = 29;
   player.y = 600;
   player.w = 70;
-  player.h = 190;
-  world.gravity.y = 13;
-  player.scale = 0.3;
+  player.h = 90;
+  player.offset.y = -10;
+  world.gravity.y = 20;
+  player.scale = 0.2;
   player.rotationLock = true;
   player.debug = true;
 
@@ -348,16 +351,41 @@ function draw() {
 
   champi1.vel.x = cos(frameCount) * 2;
   reward4.vel.x = cos(frameCount) * 2;
-  champi2.vel.y = cos(frameCount) * 7;
-  pan_up.vel.y = cos(frameCount) * 7;
+  champi2.vel.y = cos(frameCount) * 4;
+  pan_up.vel.y = cos(frameCount) * 4;
   pan_right.vel.x = cos(frameCount) * 2;
   ennemi.vel.x = cos(frameCount * 2) * 0.5;
 
-  // if (player.y < -1200 && 1250) {
-  //   messageW.visible = true;
-  // }
+  if (player.overlaps(reward1)) {
+    reward1.remove();
+  }
 
-  // if (player.x < 1250) {
-  //   messageL.visible = true;
-  // }
+  if (player.overlaps(reward2)) {
+    reward2.remove();
+  }
+
+  if (player.overlaps(reward3)) {
+    reward3.remove();
+  }
+
+  if (player.overlaps(reward4)) {
+    reward4.remove();
+  }
+
+  if (player.overlaps(pan_exit)) {
+    messageW.visible = true;
+    player.visible = false;
+  }
+
+  if (player.overlaps(ennemi)) {
+    messageL.visible = true;
+    player.visible = false;
+  }
+
+  // && = et
+  // || = ou
+  if (player.x < 0 || player.y < 0) {
+    messageL.visible = true;
+    player.visible = false;
+  }
 }
